@@ -10,3 +10,6 @@ This is the matching the three cards game! This app is made using object-oriente
 
 # Contributors
 Inderpal Brar & Haem Hariharan
+
+# License
+MIT
