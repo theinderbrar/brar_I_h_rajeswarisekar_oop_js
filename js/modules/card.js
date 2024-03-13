@@ -24,7 +24,7 @@ class Card {
         id++;
         const cardElement = document.getElementById(cardId);
         gsap.to(cardElement, { rotationY: 180, duration: 0.5, onComplete: () => {
-            cardElement.src = "cards/" + id + ".png";
+            cardElement.src = "images/" + id + ".png";
             cardElement.onclick = "";
         }});
     }
@@ -32,7 +32,7 @@ class Card {
     releaseCard(cardId, id, type) {
         const cardElement = document.getElementById(cardId);
         gsap.to(cardElement, { rotationY: 0, duration: 0.5, onComplete: () => {
-            cardElement.src = "cards/0.png";
+            cardElement.src = "images/0.png";
             cardElement.onclick = function() {
                 card.select(type, id);
             };
@@ -91,7 +91,7 @@ class Card {
             // Create card element
             const cardElement = document.createElement("img");
             cardElement.id = cardId;
-            cardElement.src = "cards/0.png"; // Initial image set to "0.png"
+            cardElement.src = "images/0.png"; // Initial image set to "0.png"
             cardElement.onclick = function() {
                 card.select(cardType, j + 1);
             };
@@ -124,7 +124,7 @@ class Card {
     //             // Create card element
     //             const cardElement = document.createElement("img");
     //             cardElement.id = cardId;
-    //             cardElement.src = "cards/0.png"; // Initial image set to "0.png"
+    //             cardElement.src = "images/0.png"; // Initial image set to "0.png"
     //             cardElement.onclick = function() {
     //                 card.select(cardType, j + 1);
     //             };
