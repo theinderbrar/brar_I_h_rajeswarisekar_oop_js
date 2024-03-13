@@ -9,25 +9,27 @@
     <!-- title -->
     <title>Memory Game</title>
 
-   
-     
+    <!-- javascript -->
+    <script src="js/modules/game.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/modules/card.js" defer></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
     <!-- css -->
     <link rel="stylesheet" href="css/main.css">
-    <script  type="module" src="js/main.js"></script>
-    
 
     <!-- title icon -->
     <link rel="shortcut icon" href="cards/0.png" type="image/x-icon">
 </head>
 
-<body  >
-     <!-- header -->
+<body onload="start();">
+    
+    <!-- header -->
     <header>
         <div class="paddup">
-            <!-- No of found: -->
-            <span id="limitOutput"></span>Scored:<span id="scoreOutput">0</span>,
+            cards found: 
+            <span id="limitOutput"></span>/<span id="scoreOutput">0</span>,
             clicks:
             <span id="clicks">0</span>
         </div>
@@ -36,16 +38,26 @@
             <input onchange="game.changeLimit()" type="range" id="range" min="4" max="12">
         </div>
 
-        <!-- <div class="paddup"> -->
-            <input type="button" value="Play" id="play" onclick="playGame();">
-        <!-- </div> -->
+        <div class="paddup"> 
+            <input type="button" value="Play" id="play" onclick="game.playGame();">
+        </div>  
 
         <div id="win"></div>
     </header>
 
     <!-- main -->
-    <main id="main"></main>
+    <div class="container">
+        <main id="main"></main>
+    </div>
 
+    <div id="winModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>You Win!</h2>
+          <p>Congratulations!</p>
+          <button id="playAgainBtn">Play Again</button>
+        </div>
+      </div>
     <!-- footer -->
     <footer>
        

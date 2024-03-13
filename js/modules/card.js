@@ -1,12 +1,9 @@
 // card.js
- 
-
-  class Card {
+class Card {
     constructor() {
         this.selectionCardsId = [];
         this.selectionCardsFullId = [];
         this.selectionCardsType = [];
- 
     }
 
     idCard(type, id) {
@@ -77,40 +74,71 @@
         document.getElementById(cardId).style.background = "#a8def0";
     }
 
-   
+   generate() {
+    const mainPanel = document.getElementById("main");
+    mainPanel.innerHTML = ""; // Clear existing cards
 
-    generate() {
-        const mainPanel = document.getElementById("main");
-        mainPanel.innerHTML = ""; // Clear existing cards
+    const numberOfCards = game.limit || 8; // Default to 8 if game.limit is not set
+    const totalCardTypes = Math.ceil(numberOfCards / 2); // We want each card type to have at least one pair
+    const cardTypes = Array.from({ length: totalCardTypes }, (_, index) => index + 1); // Create an array of unique card types
 
-        const numberOfCards = 16; // Adjust as needed
-        const cardTypes = [1, 2, 3, 4]; // Adjust as needed
-        const totalUniqueCards = numberOfCards / cardTypes.length;
+    let cardCounter = 0;
+    for (let i = 0; i < totalCardTypes; i++) {
+        const cardType = cardTypes[i];
+        for (let j = 0; j < 2; j++) { // We need two cards for each card type (to form a pair)
+            const cardId = this.idCard(cardType, j + 1);
 
-        let cardCounter = 0;
-        for (let i = 0; i < cardTypes.length; i++) {
-            const cardType = cardTypes[i];
-            for (let j = 0; j < totalUniqueCards; j++) {
-                const cardId = this.idCard(cardType, j + 1);
+            // Create card element
+            const cardElement = document.createElement("img");
+            cardElement.id = cardId;
+            cardElement.src = "cards/0.png"; // Initial image set to "0.png"
+            cardElement.onclick = function() {
+                card.select(cardType, j + 1);
+            };
 
-                // Create card element
-                const cardElement = document.createElement("img");
-                cardElement.id = cardId;
-                cardElement.src = "cards/0.png"; // Initial image set to "0.png"
-                cardElement.onclick = function() {
-                    card.select(cardType, j + 1);
-                };
+            // Add card element to main panel
+            mainPanel.appendChild(cardElement);
+            cardCounter++;
 
-                // Add card element to main panel
-                mainPanel.appendChild(cardElement);
-                cardCounter++;
-
-                if (cardCounter >= numberOfCards) {
-                    break; // Exit loop if we've reached the desired number of cards
-                }
+            if (cardCounter >= numberOfCards) {
+                break; // Exit loop if we've reached the desired number of cards
             }
         }
     }
+}
+
+    // generate() {
+    //     const mainPanel = document.getElementById("main");
+    //     mainPanel.innerHTML = ""; // Clear existing cards
+
+    //     const numberOfCards = game.limit; // Adjust as needed
+    //     const cardTypes = [1, 2, 3, 4]; // Adjust as needed
+    //     const totalUniqueCards = numberOfCards / cardTypes.length;
+
+    //     let cardCounter = 0;
+    //     for (let i = 0; i < cardTypes.length; i++) {
+    //         const cardType = cardTypes[i];
+    //         for (let j = 0; j < totalUniqueCards; j++) {
+    //             const cardId = this.idCard(cardType, j + 1);
+
+    //             // Create card element
+    //             const cardElement = document.createElement("img");
+    //             cardElement.id = cardId;
+    //             cardElement.src = "cards/0.png"; // Initial image set to "0.png"
+    //             cardElement.onclick = function() {
+    //                 card.select(cardType, j + 1);
+    //             };
+
+    //             // Add card element to main panel
+    //             mainPanel.appendChild(cardElement);
+    //             cardCounter++;
+
+    //             if (cardCounter >= numberOfCards) {
+    //                 break; // Exit loop if we've reached the desired number of cards
+    //             }
+    //         }
+    //     }
+    // }
 
     panel() {
         const mainPanel = document.getElementById("main");
@@ -128,5 +156,4 @@
     }
 }
 
-  
-export { Card };
+const card = new Card();
